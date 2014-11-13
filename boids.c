@@ -136,7 +136,6 @@ void drawBoids(list_t *list, SDL_Texture *image, SDL_Renderer *renderer) {
     iter = list_createiter(list);
     while (list_hasnext(iter)) {
         tmp = (boid_t *)list_next(iter);
-        list_passnext(iter);
         renderTexture(image, renderer, tmp->x, tmp->y);	
 }
 }
@@ -152,7 +151,6 @@ vector_t *rule1(boid_t *boidj, list_t *boidlist) {
     while (list_hasnext(iter)) {
         boid = list_next(iter);
         printf("retreived boid from list\n");
-        list_passnext(iter);
         printf("passed list further\n");
         printf("Iter is: %s\n", iter);
         if (boid != boidj) {
@@ -178,7 +176,6 @@ vector_t *rule2(boid_t *boidj, list_t *boidlist) {
     list_iter_t *iter = list_createiter(boidlist);
     while (list_hasnext(iter)) {
         boid = list_next(iter);
-        list_passnext(iter);
         if (boid != boidj) {
             if ((magnitude(boid->position) - magnitude(boidj->position)) < boiddistance) {
                 subtraction(boid->position, boidj->position);
@@ -199,7 +196,6 @@ vector_t *rule3(boid_t *boidj, list_t *boidlist) {
     list_iter_t *iter = list_createiter(boidlist);
     while (list_hasnext(iter)) {
         boid = list_next(iter);
-        list_passnext(iter);
         if (boid != boidj) {
             if ((magnitude(boid->position) - magnitude(boidj->position)) < distance) {
                 count++;
@@ -261,8 +257,6 @@ void move(list_t *boidlist) {
         static int counter;
         printf("Im here for the %d. time\n", counter);
 
-        list_set(iter, boid);
-        list_passnext(iter);
         counter++;
 
 

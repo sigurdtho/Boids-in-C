@@ -132,6 +132,7 @@ void *list_next(list_iter_t *iter) {
     }
     else {
         void *elem = iter->node->elem;
+        iter->node = iter->node->next;
         return elem;
     }
 
